@@ -2,7 +2,9 @@ package com.astontech.rest;
 
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.Optional;
+
 public interface ProductRepo extends CrudRepository<Product, Integer> {
 
-    Product findBySku(String sku);
+    Optional<Product> findBySku(String sku);
 }

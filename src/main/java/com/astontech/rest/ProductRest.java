@@ -1,5 +1,7 @@
 package com.astontech.rest;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -22,13 +24,13 @@ public class ProductRest {
     }
 
     @PostMapping("/")
-    public Product addProduct(@RequestBody Product product) {
-        return productRepo.save(product);
+    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
+        return new ResponseEntity<>(productRepo.save(product), HttpStatus.CREATED);
     }
 
     @PutMapping("/")
-    public Product updateProduct(@RequestBody Product product) {
-        return productRepo.save(product);
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
+        return new ResponseEntity<>(productRepo.save(product), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/")

@@ -89,4 +89,48 @@ public class ProductApiTestRestAssured {
                 .body("sku", equalTo("A17-223"))
                 .body("description", equalTo("Apple iPad"));
     }
+
+    @Test
+    public void patchProductWithInvalidIdShouldThrowException() {
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("sku", "A17-223");
+
+        given().header("Content-Type", "application/json")
+                .body(requestBody.toJSONString())
+                .pathParam("id", 9999)
+                .when()
+                .patch("product/{id}")
+                .then()
+                .statusCode(404);
+    }
+
+    @Test
+    public void patchProductWithInvalidFieldNameShouldThrowException() {
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("dog", "A17-223");
+
+        given().header("Content-Type", "application/json")
+                .body(requestBody.toJSONString())
+                .pathParam("id", 3)
+                .when()
+                .patch("product/{id}")
+                .then()
+                .statusCode(422);
+    }
+
+    @Test
+    public void patchProductWithCorrectInfoShouldFunctionProperly() {
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("description", "Test Description");
+
+        given().header("Content-Type", "application/json")
+                .body(requestBody.toJSONString())
+                .pathParam("id", 3)
+                .when()
+                .patch("product/{id}")
+                .then()
+                .statusCode(202)
+                .assertThat()
+                .body("description", equalTo("Test Description"));
+    }
 }

@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/product")
 public class ProductRest {
@@ -31,6 +33,17 @@ public class ProductRest {
     public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
         return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.ACCEPTED);
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> partialUpdateDynamic(
+            @RequestBody Map<String, Object> updates,
+            @PathVariable Integer id) {
+        return new ResponseEntity<>(
+                productService.patchProduct(updates, id),
+                HttpStatus.ACCEPTED
+        );
+    }
+
 
     @DeleteMapping("/")
     public void deleteProduct(@RequestBody Product product) {

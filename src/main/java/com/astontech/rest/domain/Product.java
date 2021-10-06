@@ -16,4 +16,8 @@ public class Product {
     private String sku;
 
     private String description;
+    private Integer quantity;
+    private Float price;
+    private Float weight;
+    private String dimensions;
 }

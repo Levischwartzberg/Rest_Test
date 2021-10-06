@@ -1,4 +1,4 @@
-package com.astontech.rest;
+package com.astontech.rest.domain;
 
 import lombok.Data;
 

@@ -1,5 +1,6 @@
-package com.astontech.rest;
+package com.astontech.rest.controllers.advice;
 
+import com.astontech.rest.exceptions.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
